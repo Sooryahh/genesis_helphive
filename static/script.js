@@ -1,0 +1,1 @@
+document.querySelectorAll(".flash").forEach(function(el){setTimeout(function(){el.style.opacity="0.85"},3500)});

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Student Dashboard | HelpHive{% endblock %}
+{% block content %}
+<div class="page-heading"><h1>Hello, {{ current_user.get('name') }} 👋</h1><p>Your volunteering journey.</p></div>
+<div class="section-heading"><h2>My registrations</h2><a href="{{ url_for('opportunities') }}">Find more →</a></div>
+<div class="table-wrap"><table><tr><th>Opportunity</th><th>Date</th><th>Status</th><th>Attendance</th></tr>
+{% for r in registrations %}<tr><td>{{ r.title }}</td><td>{{ r.event_date }}</td><td><span class="status {{ r.status }}">{{ r.status }}</span></td><td>{{ 'Present' if r.attendance else 'Not marked' }}</td></tr>{% else %}<tr><td colspan="4">No registrations yet.</td></tr>{% endfor %}
+</table></div>
+{% endblock %}

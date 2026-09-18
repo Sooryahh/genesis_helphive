@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ opportunity.title }} | HelpHive{% endblock %}
+{% block content %}
+<div class="detail-card">
+<span class="tag">{{ opportunity.category }}</span><h1>{{ opportunity.title }}</h1>
+<p class="large">{{ opportunity.description }}</p>
+<div class="detail-grid"><div>📍 <b>Location</b><br>{{ opportunity.location }}</div><div>📅 <b>Date</b><br>{{ opportunity.event_date }}</div><div>👥 <b>Capacity</b><br>{{ opportunity.volunteer_count }}/{{ opportunity.capacity }}</div><div>🙋 <b>Organizer</b><br>{{ opportunity.organizer_name }}</div></div>
+{% if current_user.get('user_id') and current_user.get('role')=='student' %}
+{% if already %}<div class="notice">You have already registered for this opportunity.</div>
+{% else %}<form method="POST" action="{{ url_for('register_opportunity', opportunity_id=opportunity.id) }}"><button class="button">Register as volunteer</button></form>{% endif %}
+{% elif not current_user.get('user_id') %}<a class="button" href="{{ url_for('login') }}">Login to register</a>
+{% endif %}
+</div>
+{% endblock %}

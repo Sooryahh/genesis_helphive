@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+helphive.db
+.env
+.vscode/
+instance/

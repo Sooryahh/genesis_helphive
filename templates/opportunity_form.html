@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Opportunity Form | HelpHive{% endblock %}
+{% block content %}
+<div class="form-card wide"><h1>{{ 'Edit opportunity' if opportunity else 'Create opportunity' }}</h1>
+<form method="POST">
+<label>Title<input name="title" value="{{ opportunity.title if opportunity else '' }}" required></label>
+<label>Description<textarea name="description" rows="5" required>{{ opportunity.description if opportunity else '' }}</textarea></label>
+<label>Category<select name="category" required>{% for c in ['Environment','Education','Social Service','Health','Technology','Campus','Other'] %}<option value="{{ c }}" {% if opportunity and opportunity.category==c %}selected{% endif %}>{{ c }}</option>{% endfor %}</select></label>
+<label>Location<input name="location" value="{{ opportunity.location if opportunity else '' }}" required></label>
+<label>Event date<input type="date" name="event_date" value="{{ opportunity.event_date if opportunity else '' }}" required></label>
+<label>Volunteer capacity<input type="number" min="1" name="capacity" value="{{ opportunity.capacity if opportunity else 20 }}" required></label>
+<button class="button full">Save opportunity</button>
+</form></div>
+{% endblock %}

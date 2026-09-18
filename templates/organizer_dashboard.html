@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Organizer Dashboard | HelpHive{% endblock %}
+{% block content %}
+<div class="page-heading"><h1>Organizer dashboard</h1><p>Create opportunities and manage your volunteers.</p><a class="button" href="{{ url_for('create_opportunity') }}">+ Create opportunity</a></div>
+<div class="grid">
+{% for item in opportunities %}<article class="card"><span class="tag">{{ item.category }}</span><h3>{{ item.title }}</h3><p>📅 {{ item.event_date }} · 📍 {{ item.location }}</p><p>{{ item.registration_count }} registrations</p><div class="card-bottom"><a href="{{ url_for('registrations', opportunity_id=item.id) }}">Volunteers →</a><a href="{{ url_for('edit_opportunity', opportunity_id=item.id) }}">Edit</a></div><form method="POST" action="{{ url_for('delete_opportunity', opportunity_id=item.id) }}" onsubmit="return confirm('Delete this opportunity?')"><button class="link-danger">Delete</button></form></article>
+{% else %}<p>You have not created any opportunities.</p>{% endfor %}
+</div>
+{% endblock %}
